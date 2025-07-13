@@ -1,0 +1,63 @@
+{
+  "srt_file": "Barbaros_Kubatoglu_6.srt",
+  "output_file": "Barbaros_Kubatoglu_6.ass",
+  "delay_seconds": 4.5,
+  "components": [
+    {
+      "text": "Barbaros Kubatoğlu",
+      "start_seconds": 5.0,
+      "end_seconds": 19.0,
+      "fontname": "Segoe UI",
+      "fontsize": 12,
+      "alignment": 7,
+      "marginl": 20,
+      "marginr": 10,
+      "marginv": 40,
+      "opacity": 0.7,
+      "fadein": 500,
+      "fadeout": 500
+    },
+    {
+      "text": "Gemi İnşaatı ve Gemi Makinaları Mühendisliği",
+      "start_seconds": 5.0,
+      "end_seconds": 19.0,
+      "fontname": "Segoe UI",
+      "fontsize": 10,
+      "alignment": 7,
+      "marginl": 20,
+      "marginr": 10,
+      "marginv": 55,
+      "opacity": 0.7,
+      "fadein": 500,
+      "fadeout": 500
+    },
+    {
+      "text": "1995 Mezunu",
+      "start_seconds": 5.0,
+      "end_seconds": 19.0,
+      "fontname": "Segoe UI",
+      "fontsize": 10,
+      "alignment": 7,
+      "marginl": 20,
+      "marginr": 10,
+      "marginv": 70,
+      "opacity": 0.7,
+      "fadein": 500,
+      "fadeout": 500
+    },
+    {
+      "text": "Pegasus Havayolları, Finans Genel Müdür Yardımcısı (CFO)",
+      "start_seconds": 5.0,
+      "end_seconds": 19.0,
+      "fontname": "Segoe UI",
+      "fontsize": 8,
+      "alignment": 7,
+      "marginl": 20,
+      "marginr": 10,
+      "marginv": 85,
+      "opacity": 0.7,
+      "fadein": 500,
+      "fadeout": 500
+    }
+  ]
+}
