@@ -1,4 +1,4 @@
-# Mezun Video Altyazı Araçları
+# Altyazı Araçları
 
 ## Giriş
 
@@ -25,17 +25,21 @@ Bu repo İstanbul Teknik Üniversitesi Tanıtım Komisyonu tarafından hazırlan
 ## Kullanım
 
 ### 1. Altyazı dosyası oluşturma
-- `srt.py` dosyasını kullanarak bir video veya ses dosyasından altyazı dosyası (`*.srt`) oluşturabilirsiniz. Terminalde şu komutu çalıştırın:
-
+- `srt.py` dosyasını çalıştırarak, `config.json` dosyasında belirtilen video veya ses dosyasından otomatik olarak altyazı dosyası (`.srt`) oluşturabilirsiniz. Komut satırında dosya adı vermenize gerek yoktur, gerekli bilgiler `config.json` üzerinden okunur.
     ```bash
-    python srt.py <video_dosyası.mp4>
+    python srt.py
     ```
+
+### 1.1. Video veya ses dosyasından ses çıkarmak için örnek ffmpeg komutu:
+```bash
+ffmpeg -i "input.mp4" -vn "output.mp3"
+```
+Bu komut, video dosyasından sesi ayırıp mp3 olarak kaydeder.
 
 ### 2. Altyazı dosyasının imla kontrolü
 - `srt.py` tarafından oluşturulan `*.srt` dosyasını bir metin
   düzenleyicisi ile açarak yazım ve noktalama hatalarını düzeltin.
-  Gerekirse `config.json` dosyasında `srt_file` alanını değiştirerek
-  çıktı dosyasının adını belirleyebilirsiniz.
+  AI araçları kullanarak bu işlemi daha hızlı yapabilirsiniz.
 
 ### 3. Altyazı okunabilirliğini artırma
 - `config.json` içindeki `word_options` ayarları ile satır uzunluğu ve
@@ -55,8 +59,9 @@ Bu repo İstanbul Teknik Üniversitesi Tanıtım Komisyonu tarafından hazırlan
 - Oluşturduğunuz ASS dosyasını videoya gömmek için aşağıdaki FFmpeg
   komutunu kullanabilirsiniz:
   ```bash
-  ffmpeg -i <giris.mp4> -vf "ass=<dosya.adı.ass>" -c:a copy <çıkış.mp4>
+  ffmpeg -i "input.mp4" -vf "ass=input.ass" -c:a copy "output_embedsubs.mp4"
   ```
+  Bu komut, belirtilen ASS altyazı dosyasını videoya gömer ve ses parçasını değiştirmeden yeni bir video dosyası oluşturur.
 
 
 ## `config.json` parametreleri
@@ -67,7 +72,7 @@ Aşağıdaki başlıca alanlar `config.json` dosyası ile yapılandırılabilir:
 - **video_file**: Video içeren giriş dosyası (audio_file yoksa kullanılır).
 - **srt_file**: `srt.py` çalıştırıldığında oluşturulacak altyazı dosyası.
 - **ass_file**: `srt2ass.py` tarafından üretilen ASS dosyasının adı.
-- **delay_seconds**: Altyazıların ne kadar süre kaydırılacağı.
+- **delay_seconds**: Altyazıların ne kadar süre kaydırılacağı. (Giriş kısmı videoya eklenmeden önce srt oluşturulduğu durumda gerekli)
 - **language**: Ses veya video dili (örneğin `tr`).
 - **model**: Kullanılacak Whisper modelinin adı.
 - **task**: `transcribe` ya da `translate` görevlerinden biri.
@@ -81,23 +86,29 @@ Aşağıdaki başlıca alanlar `config.json` dosyası ile yapılandırılabilir:
 ### mobile_style
 Bu nesne, tüm altyazı satırlarına uygulanacak temel ASS stilini tanımlar.
 
-- **fontname**: Kullanılacak yazı tipi.
-- **fontsize**: Yazı boyutu.
-- **primarycolor** / **backcolor**: Metin ve arka plan renkleri.
-- **outline**: Kenar çizgisi kalınlığı.
-- **shadow**: Gölge kalınlığı.
-- **alignment**: Ekrandaki hizalama kodu.
-- **marginl**, **marginr**, **marginv**: Kenar boşlukları.
-- **bold**: Metin kalınlığı.
-- **borderstyle**: Kenarlık stili.
-- **opacity**: Arka plan saydamlığı.
+- **fontname**: Kullanılacak yazı tipi. Windows'ta yüklü bir fontun adı olmalıdır. Eğer font sistemde yoksa Arial kullanılır.
+- **fontsize**: Yazı tipi boyutu (punto cinsinden).
+- **primarycolor**: Altyazı metninin ana rengi. BGR (mavi-yeşil-kırmızı) formatında uzun bir tam sayı olarak belirtilir.
+- **backcolor**: Altyazı kenarlığı veya gölgesi için arka plan rengi. BGR formatında.
+- **outline**: Metnin etrafındaki kenarlık kalınlığı (piksel cinsinden). Sadece BorderStyle 1 ise geçerlidir.
+- **shadow**: Metnin arkasındaki gölge derinliği (piksel cinsinden). Sadece BorderStyle 1 ise geçerlidir.
+- **alignment**: Altyazının ekrandaki yatay ve dikey hizalamasını belirler. Numpad düzenine göre: 1-3 alt, 4-6 orta, 7-9 üst. (1=sol, 2=orta, 3=sağ; 4 eklenirse üst başlık, 8 eklenirse orta başlık)
+- **marginl**, **marginr**: Kenar boşlukları. Ekranın sol ve sağ kenarından olan mesafeler (piksel cinsinden).
+- **marginv** :  Altyazının dikey konumunu piksel cinsinden belirler.
+    - Bir altyazı (subtitle) için, ekranın altından olan mesafeyi ifade eder.
+    - Bir üst başlık (toptitle) için, ekranın üstünden olan mesafeyi ifade eder.
+    - Bir orta başlık (midtitle) için, bu değer dikkate alınmaz; metin otomatik olarak dikeyde ortalanır
+- **bold**: Metnin kalın olup olmadığını belirtir. -1 kalın, 0 normal.
+- **borderstyle**: Kenarlık stili. 1: Kenarlık + gölge, 3: Opak kutu.
+- **opacity**: Arka planın saydamlığı (ASS formatında alpha kanalı ile ayarlanır).
 
 ### components
-Her bir öğe ekranda belirli zamanlarda gösterilecek metni ve stilini tanımlar.
+Her bir öğe ekranda belirli zamanlarda gösterilecek metin kutusu ve stilini tanımlar.
 
 - **text**: Görünecek yazı.
 - **start_seconds** / **end_seconds**: Görünme suresi aralığı.
 - Diğer stil parametreleri `mobile_style` ile aynıdır.
-- **fadein** ve **fadeout**: Yazının giriş/çıkış efekt süreleri (ms).
+- **fadein** ve **fadeout**: Yazının giriş/çıkış efekt süreleri (ms).  
+
 Örnek bir yapılandırma için repodaki `config.json` dosyasını inceleyebilirsiniz.
 
