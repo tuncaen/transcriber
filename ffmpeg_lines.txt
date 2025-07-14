@@ -1,2 +1,2 @@
-ffmpeg -i "Haluk Coban_3.mp4" -vn "Haluk Coban_3.mp3"
-ffmpeg -i "Haluk Coban_3.mp4" -vf "ass=Haluk Coban_3.ass" -c:a copy "Haluk Coban_3_notag_embedsubs_mobile.mp4"
+ffmpeg -i "Barbaros_Kubatoglu_6.mp4" -vn "Barbaros_Kubatoglu_6.mp3"
+ffmpeg -i "Barbaros_Kubatoglu_6.mp4" -vf "ass=Barbaros_Kubatoglu_6.ass" -c:a copy "Barbaros_Kubatoglu_6_notag_embedsubs_mobile.mp4"
