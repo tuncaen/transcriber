@@ -2,8 +2,8 @@
   "audio_file": "Barbaros_Kubatoglu_6.mp3",
   "video_file": "Barbaros_Kubatoglu_6.mp4",
   "srt_file": "Barbaros_Kubatoglu_6.srt",
-  "ass_file": "Barbaros_Kubatoglu_6.ass",
-  "delay_seconds": 4.7,
+  "ass_file": "Barbaros_Kubatoglu_6_notag.ass",
+  "delay_seconds": 4.3,
   "language": "tr",
   "model": "large",
   "task": "transcribe",
@@ -53,7 +53,7 @@
     },
     {
       "text": "Gemi İnşaatı ve Gemi Makinaları Mühendisliği",
-      "start_seconds": 2,
+      "start_seconds": 2.0,
       "end_seconds": 14.0,
       "fontname": "IBM Plex Mono",
       "fontsize": 8,
@@ -73,7 +73,7 @@
     },
     {
       "text": "1995 Mezunu",
-      "start_seconds": 2.5,
+      "start_seconds": 2.0,
       "end_seconds": 13.5,
       "fontname": "IBM Plex Mono",
       "fontsize": 7,
@@ -93,7 +93,7 @@
     },
     {
       "text": "Pegasus Havayolları",
-      "start_seconds": 4,
+      "start_seconds": 3.0,
       "end_seconds": 13.0,
       "fontname": "IBM Plex Mono",
       "fontsize": 8,
@@ -113,7 +113,7 @@
     },
     {
       "text": "Finans Genel Müdür Yardımcısı (CFO)",
-      "start_seconds": 4.5,
+      "start_seconds": 3.0,
       "end_seconds": 12.5,
       "fontname": "IBM Plex Mono",
       "fontsize": 7,
